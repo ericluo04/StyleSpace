@@ -209,10 +209,6 @@ class Manipulator():
     def EditOneC(self,cindex,dlatent_tmp=None): 
         if dlatent_tmp==None:
             dlatent_tmp=[tmp[self.img_index:(self.img_index+self.num_images)] for tmp in self.dlatents]
-        print(type(dlatent_tmp))
-        print(dlatent_tmp)
-        print("one example")
-        print(dlatent_tmp[0])
         boundary_tmp=[[] for i in range(len(self.dlatents))]
         
         #'only manipulate 1 layer and one channel'

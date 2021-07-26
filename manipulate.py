@@ -57,7 +57,7 @@ def LoadData(img_path):
 
 # load StyleGAN2 model
 def LoadModel(model_path,model_name):
-    # Initialize TensorFlow.
+    # initialize TensorFlow.
     tflib.init_tf()
     tmp=os.path.join(model_path,model_name)
     with open(tmp, 'rb') as f:
@@ -203,14 +203,8 @@ class Manipulator():
     
     # edit image in style space (ONLY manipulating 1 layer and 1 channel)
     def EditOneC(self,cindex,dlatent_tmp=None): 
-        print("dlatents")
-        print(type(self.dlatents))
-        print(self.dlatents)
-        print("tmp")
-        print(type(tmp))
-        print(tmp)
         if dlatent_tmp==None:
-            dlatent_tmp=[[tmp[i] for i in self.seed_list] for tmp in self.dlatents]
+            dlatent_tmp=[[np.array(tmp[i]) for i in self.seed_list] for tmp in self.dlatents]
         boundary_tmp=[[] for i in range(len(self.dlatents))]
         
         # check function condition
