@@ -202,11 +202,18 @@ class Manipulator():
         return codes,out
     
     # edit image in style space (ONLY manipulating 1 layer and 1 channel)
-    def EditOneC(self,cindex,dlatent_tmp=None): 
+    def EditOneC(self,cindex,dlatent_tmp=None):
+        print("dlatents")
+        print(self.dlatents)
+        print("one example")
+        print(self.dlatents[0])
         if dlatent_tmp==None:
             dlatent_tmp=[[np.array(tmp[i]) for i in self.seed_list] for tmp in self.dlatents]
         boundary_tmp=[[] for i in range(len(self.dlatents))]
-        
+        print("dlatent_tmp")
+        print(dlatent_tmp)
+        print("one example")
+        print(dlatent_tmp[0])
         # check function condition
         assert len(self.manipulate_layers)==1 
         
