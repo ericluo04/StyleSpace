@@ -96,7 +96,7 @@ class Manipulator():
         self.model_name=dataset_name+'.pkl'
         
         # list of seeds to generate
-        self.seed_list = [0, 1, 2, 3, 4, 5]
+        self.seed_list=[0, 1, 2, 3, 4, 5]
         # number of images to generate
         self.num_images=len(self.seed_list)
         # manipulation strength
@@ -187,7 +187,8 @@ class Manipulator():
     # edit image in style space
     def EditOne(self,bname,dlatent_tmp=None):
         if dlatent_tmp==None:
-            dlatent_tmp=[[tmp[i] for i in self.seed_list] for tmp in self.dlatents]
+            # modify to reset array type
+            dlatent_tmp=[np.array([tmp[i] for i in self.seed_list]) for tmp in self.dlatents]
         
         boundary_tmp=[]
         for i in range(len(self.boundary)):
@@ -204,6 +205,7 @@ class Manipulator():
     # edit image in style space (ONLY manipulating 1 layer and 1 channel)
     def EditOneC(self,cindex,dlatent_tmp=None):
         if dlatent_tmp==None:
+            # modify to reset array type
             dlatent_tmp=[np.array([tmp[i] for i in self.seed_list]) for tmp in self.dlatents]
         boundary_tmp=[[] for i in range(len(self.dlatents))]
         # check function condition
