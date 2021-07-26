@@ -204,8 +204,8 @@ class Manipulator():
     # edit image in style space (ONLY manipulating 1 layer and 1 channel)
     def EditOneC(self,cindex,dlatent_tmp=None): 
         print("dlatents")
-        print(type(dlatents))
-        print(dlatents)
+        print(type(self.dlatents))
+        print(self.dlatents)
         print("tmp")
         print(type(tmp))
         print(tmp)
