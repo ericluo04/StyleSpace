@@ -36,7 +36,6 @@ def LoadModel(model_path,model_name):
     tmp=os.path.join(model_path,model_name)
     with open(tmp, 'rb') as f:
         _, _, Gs = pickle.load(f)
-    Gs.print_layers()
     return Gs
 
 # convert minibatch of images from float32 to uint8 with configurable dynamic range
