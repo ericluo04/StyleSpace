@@ -7,32 +7,6 @@ import tensorflow as tf
 from dnnlib import tflib
 from utils.visualizer import HtmlPageVisualizer
 
-# visualize a collection of images
-def Vis(bname,suffix,out,rownames=None,colnames=None):
-    num_images=out.shape[0]
-    step=out.shape[1]
-    
-    if colnames is None:
-        colnames=[f'Step {i:02d}' for i in range(1, step + 1)]
-    if rownames is None:
-        rownames=[str(i) for i in range(num_images)]
-    
-    visualizer = HtmlPageVisualizer(
-      num_rows=num_images, num_cols=step + 1, viz_size=256)
-    visualizer.set_headers(
-      ['Name'] +colnames)
-    
-    for i in range(num_images):
-        visualizer.set_cell(i, 0, text=rownames[i])
-    
-    for i in range(num_images):
-        for k in range(step):
-            image=out[i,k,:,:,:]
-            visualizer.set_cell(i, 1+k, image=image)
-    
-    # save results
-    visualizer.save(f'./html/'+bname+'_'+suffix+'.html')
-
 # load latents, values for attribute-specific channels
 def LoadData(img_path):
     tmp=img_path+'S'
@@ -243,5 +217,3 @@ if __name__ == "__main__":
     # manipulate
     M.manipulate_layers=[lindex]
     codes,out=M.EditOneC(cindex) #dlatent_tmp
-    tmp=str(M.manipulate_layers)+'_'+str(cindex)
-    M.Vis(tmp,'c',out)
