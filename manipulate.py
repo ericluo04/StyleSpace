@@ -88,7 +88,6 @@ class Manipulator():
         self.Gs=LoadModel(self.model_path,self.model_name)
         self.num_layers=len(self.dlatents)
         
-        self.Vis=Vis
         self.noise_constant={}
         
         # style space
