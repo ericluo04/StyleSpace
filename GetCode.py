@@ -192,7 +192,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     random_state=5
-    num_img=10_000
+    num_img=25_000
     num_once=1_000
     dataset_name=args.dataset_name
     
