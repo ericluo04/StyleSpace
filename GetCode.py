@@ -71,7 +71,7 @@ def GetKName(Gs):
 
 def GetCode(Gs,random_state,num_img,num_once,dataset_name, random_increment=None):
     rnd = np.random.RandomState(random_state)  #5
-    if random_increment != None:
+    if random_increment >= 2:
         random_step = [random.random() for i in range(1, random_increment+1)]
     
     truncation_psi=0.7
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     parser.add_argument('--dataset_name',type=str,default='ffhq',
                         help='name of dataset, for example, ffhq')
     parser.add_argument('--code_type',choices=['w','s','s_mean_std'],default='w')
-    parser.add_argument('--random_increment',default=None,
+    parser.add_argument('--random_increment',type=int,default=0,
                         help='amount to increment random seed (e.g., 10,000)')
 
     args = parser.parse_args()
