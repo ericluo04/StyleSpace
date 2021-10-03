@@ -1,5 +1,3 @@
-
-
 import os
 import pickle
 import numpy as np
@@ -62,7 +60,6 @@ def SelectName2(layer_name):
     return tmp
 
 def GetKName(Gs):
-    
     layers=[var for name, var in Gs.components.synthesis.vars.items()]
     
     select_layers=[]
@@ -72,8 +69,10 @@ def GetKName(Gs):
             select_layers.append(layer)
     return select_layers
 
-def GetCode(Gs,random_state,num_img,num_once,dataset_name):
+def GetCode(random_increment=None, Gs,random_state,num_img,num_once,dataset_name):
     rnd = np.random.RandomState(random_state)  #5
+    if random_increment != None:
+        random_step = [random.random() for i in range(1, random_increment+1)]
     
     truncation_psi=0.7
     truncation_cutoff=8
@@ -186,8 +185,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process some integers.')
     
     parser.add_argument('--dataset_name',type=str,default='ffhq',
-                    help='name of dataset, for example, ffhq')
+                        help='name of dataset, for example, ffhq')
     parser.add_argument('--code_type',choices=['w','s','s_mean_std'],default='w')
+    parser.add_argument('--random_increment',default=None,
+                        help='amount to increment random seed (e.g., 10,000)')
     
     args = parser.parse_args()
     random_state=5
@@ -206,11 +207,11 @@ if __name__ == "__main__":
     
     if args.code_type=='w':
         Gs=LoadModel(dataset_name=dataset_name)
-        GetCode(Gs,random_state,num_img,num_once,dataset_name)
+        GetCode(random_increment=args.random_increment, Gs,random_state,num_img,num_once,dataset_name)
 #        GetImg(Gs,num_img=num_img,num_once=num_once,dataset_name=dataset_name,save_name='images_100K') #no need 
     elif args.code_type=='s':
         save_name='S'
-        save_tmp=GetS(dataset_name,num_img=10_000)
+        save_tmp=GetS(dataset_name,num_img=num_img)
         tmp='./npy/'+dataset_name+'/'+save_name
         with open(tmp, "wb") as fp:
             pickle.dump(save_tmp, fp)
