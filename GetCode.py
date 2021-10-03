@@ -69,7 +69,7 @@ def GetKName(Gs):
             select_layers.append(layer)
     return select_layers
 
-def GetCode(random_increment=None, Gs,random_state,num_img,num_once,dataset_name):
+def GetCode(Gs,random_state,num_img,num_once,dataset_name, random_increment=None):
     rnd = np.random.RandomState(random_state)  #5
     if random_increment != None:
         random_step = [random.random() for i in range(1, random_increment+1)]
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     parser.add_argument('--code_type',choices=['w','s','s_mean_std'],default='w')
     parser.add_argument('--random_increment',default=None,
                         help='amount to increment random seed (e.g., 10,000)')
-    
+
     args = parser.parse_args()
     random_state=5
     num_img=10_000
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     
     if args.code_type=='w':
         Gs=LoadModel(dataset_name=dataset_name)
-        GetCode(random_increment=args.random_increment, Gs,random_state,num_img,num_once,dataset_name)
+        GetCode(Gs,random_state,num_img,num_once,dataset_name,random_increment=args.random_increment)
 #        GetImg(Gs,num_img=num_img,num_once=num_once,dataset_name=dataset_name,save_name='images_100K') #no need 
     elif args.code_type=='s':
         save_name='S'
